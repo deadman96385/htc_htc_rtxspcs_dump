@@ -1,0 +1,92 @@
+###########################
+#  init.hosd.ftm_rtx.rc   #
+###########################
+
+on late-ftm
+    start cnss-daemon
+    start vendor.hwcomposer-2-2
+
+service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
+    class late_start
+    user system
+    group system inet net_admin wifi
+	capabilities NET_ADMIN
+
+on htc-wifi-tftp-permission
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
+    mkdir /mnt/vendor/persist/secnvm 0770 system system
+
+#HTC_AUD_START
+on late-ftm
+    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules audio_wglink audio_q6_pdr audio_q6_notifier audio_apr audio_adsp_loader audio_q6 audio_native audio_usf audio_pinctrl_wcd audio_swr audio_platform audio_hdmi audio_wcd_spi audio_stub audio_wcd_core audio_wsa881x audio_wcd9360 audio_hdmi audio_machine_msmnile
+    write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
+
+    # Enable bus-dcvs
+    write /sys/devices/virtual/npu/msm_npu/pwr 1
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/governor "bw_hwmon"
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/polling_interval 40
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/mbps_zones "1720 2929 3879 5931 6881 7980"
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/sample_ms 4
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/io_percent 80
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/hist_memory 20
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/hyst_length 6
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/down_thres 30
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/guard_band_mbps 0
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/up_scale 250
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/idle_mbps 0
+    write /sys/devices/virtual/npu/msm_npu/pwr 0
+
+    #Enable userspace governor for L3 cdsp nodes
+    write /sys/devices/platform/soc/soc:qcom,cdsp-cdsp-l3-lat/devfreq/soc:qcom,cdsp-cdsp-l3-lat/governor "cdspl3"
+#HTC_AUD_END
+
+#HTC_BSP_START
+on late-init
+    trigger firmware_mounts_complete
+
+on firmware_mounts_complete
+    rm /dev/.booting
+#HTC_BSP_END
+
+# [HTC_BT][FTM] +++
+on late-init
+    symlink /vendor/bt_firmware /bt_firmware
+# [HTC_BT][FTM] ---
+
+
+#Set 2LC as default ftm cpu policy
+on property:ro.boot.mode=ftm
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1209600
+	write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1209600
+	write /sys/devices/system/cpu/cpu2/online 0
+	write /sys/devices/system/cpu/cpu3/online 0
+	write /sys/devices/system/cpu/cpu4/online 0
+	write /sys/devices/system/cpu/cpu5/online 0
+	write /sys/devices/system/cpu/cpu6/online 0
+	write /sys/devices/system/cpu/cpu7/online 0
+
+on post-late-ftm
+    start vendor.spdaemon
+    start vendor.sec_nvm
+
+service vendor.spdaemon /vendor/bin/spdaemon
+    class core
+    user system
+    group system
+    shutdown critical
+
+service vendor.sec_nvm /vendor/bin/sec_nvm
+    class core
+    user system
+    group system
+
+# For slpi
+on late-ftm
+    write /sys/kernel/boot_slpi/boot 1
+
+    # For hdcp key provision
+    exec -- /vendor/bin/sh /vendor/bin/init.qcom.firmware_links.sh /vendor/firmware /firmware/image "hdcp*"

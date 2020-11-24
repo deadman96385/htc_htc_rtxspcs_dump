@@ -1,0 +1,15 @@
+HEADER,IME(SDM845)_20171031_v21,Sean
+Default BT_NREC=0(off),1420,1520,BT side request mobile to disable NREC
+Default Carkit_NREC=1(on),1027,1127,BT side request mobile to enable NREC
+Default BT_NREC=1(on),1001,1101,BT side request mobile to enable NREC
+Default Car-kit_NREC=0(off),1420,1520,BT side request mobile to disable NREC
+MFE XI Telecom,1420,1520,ACQUA BT
+MFE XI "CS",1420,1520,ACQUA BT
+MFE XI "03",1420,1520,ACQUA BT
+@^[0-9]{8}-CH[1-4]$,1801,1901,Metrico BT MOS
+@^MT8855A [0-9]{4}$,1802,1902,VzW lab
+------,1421,1521,Backup TBD
+------,1426,1526,Backup TBD
+------,1429,1529,Backup TBD
+------,1601,1701,Backup TBD
+END,,,

@@ -1,0 +1,4 @@
+# this file is for mount_all in recovery mode
+# recovery mode will not to mount all partition
+# but we will want to auto format and mount by mount_all for /devlog
+/dev/block/bootdevice/by-name/devlog       /devlog         ext4    nosuid,nodev,barrier=1,errors=continue              wait,check,formattable

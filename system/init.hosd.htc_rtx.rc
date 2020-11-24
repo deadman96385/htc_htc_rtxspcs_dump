@@ -1,0 +1,57 @@
+import init.hosd.common.rc
+import init.hosd.ftm_rtx.rc
+import init.hosd.usb.configfs.rc
+import init.htc.storage.exfat.rc
+
+on init
+    setprop sys.usb.controller "a600000.dwc3"
+
+# [HTC][TP]
+    write /sys/bus/i2c/devices/3-0038/fts_upgrade_bin "focaltech_all.bin 1"
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+    mkdir /mnt/devlog 0700 root root
+    wait /dev/block/bootdevice/by-name/devlog
+    e2fsck /dev/block/bootdevice/by-name/devlog
+    mount ext4 /dev/block/bootdevice/by-name/devlog /mnt/devlog nosuid nodev barrier=1,errors=continue
+
+    mkdir /mnt/fataldevlog 0700 root root
+    wait /dev/block/bootdevice/by-name/fataldevlog
+    e2fsck /dev/block/bootdevice/by-name/fataldevlog
+    mount ext4 /dev/block/bootdevice/by-name/fataldevlog /mnt/fataldevlog nosuid nodev barrier=1,errors=continue
+
+on property:ro.boot.mode=offmode_charging
+    mkdir /mnt/vendor/persist 0771 root system
+    mount_all offmode_charging.fstab
+    setprop persist.vendor.chg.max_volt_mv 9000
+    start vendor.hvdcp_opti
+    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules audio_wglink audio_q6_pdr audio_q6_notifier audio_apr audio_adsp_loader audio_q6 audio_native audio_usf audio_pinctrl_wcd audio_swr audio_platform audio_hdmi audio_wcd_spi audio_stub audio_wcd_core audio_wsa881x audio_wcd9360 audio_hdmi audio_machine_msmnile
+    write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
+
+    # Enable bus-dcvs
+    write /sys/devices/virtual/npu/msm_npu/pwr 1
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/governor "bw_hwmon"
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/polling_interval 40
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/mbps_zones "1720 2929 3879 5931 6881 7980"
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/sample_ms 4
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/io_percent 80
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/hist_memory 20
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/hyst_length 6
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/down_thres 30
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/guard_band_mbps 0
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/up_scale 250
+    write /sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/bw_hwmon/idle_mbps 0
+    write /sys/devices/virtual/npu/msm_npu/pwr 0
+
+    #Enable userspace governor for L3 cdsp nodes
+    write /sys/devices/platform/soc/soc:qcom,cdsp-cdsp-l3-lat/devfreq/soc:qcom,cdsp-cdsp-l3-lat/governor "cdspl3"
+
+service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
+    class main
+    user root
+    group system wakelock
+    disabled

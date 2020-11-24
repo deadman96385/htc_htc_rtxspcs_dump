@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<customization_form>
+  <category name="application">
+    <module name="FOTA">
+      <function name="settings">
+        <set name="single">
+          <item name="Enable_FOTA_UI" type="boolean">yes</item>
+          <item name="Enable_Manual_Check" type="boolean">yes</item>
+          <item name="Default_Download_Wifi" type="boolean">no</item>
+        </set>
+      </function>
+    </module>
+    <module name="HotspotName">
+      <function>
+        <set name="single">
+          <item name="device_name">HTC 5G Hub</item>
+          <item name="additional_string">random</item>
+          <item name="additional_count">4</item>
+        </set>
+      </function>
+    </module>
+    <module name="Drm_Provider">
+      <function name="Drm_Support">
+        <set name="single">
+          <item name="CD">no</item>
+        </set>
+      </function>
+    </module>
+    <module name="Crash_Report">
+      <function name="setting">
+        <set name="single">
+          <item name="turn_off_report" type="boolean">no</item>
+          <item name="turn_off_application_log" type="boolean">yes</item>
+          <item name="enable_auto_report_preference" type="boolean">no</item>
+          <item name="all_data_connection_preference" type="boolean">no</item>
+          <item name="only_wifi_option" type="boolean">yes</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="ACC">
+    <module name="Software_Update_FOTA">
+      <function name="settings">
+        <set>
+          <item name="support_default_auto_update" type="boolean">true</item>
+        </set>
+      </function>
+    </module>
+    <module name="Android_Telephony">
+      <function name="settings">
+        <set type="string-array" name="cdma_adc_list_chameleon">
+          <item>1;Voicemail</item>
+          <item>211;Community Information</item>
+          <item>311;Non-Emergency Services</item>
+          <item>411;Directory Assistance</item>
+          <item>511;Traffic Information</item>
+          <item>611;Carrier Service Repair</item>
+          <item>711;TRS Relay for TTY</item>
+          <item>811;Call Before You Dig</item>
+          <item>911;9-1-1 Emergency</item>
+          <item>#911;9-1-1 Emergency</item>
+          <item>*911;9-1-1 Emergency</item>
+        </set>
+      </function>
+    </module>
+    <module name="Prism">
+      <function name="settings">
+        <set>
+          <item name="enable_blinkfeed_feature" type="boolean">true</item>
+          <item name="feed_ui_persist_masthead" type="boolean">true</item>
+        </set>
+      </function>
+    </module>
+    <module name="Setup">
+      <function name="settings">
+        <set>
+          <item name="oobe_boot_image" type="string">htc.png</item>
+        </set>
+      </function>
+    </module>
+    <module name="Settings">
+      <function name="supported_locales">
+        <set name="en" type="string-array">
+          <item>en-US</item>
+        </set>
+        <set name="es" type="string-array">
+          <item>es-US</item>
+        </set>
+        <set name="zh-Hans" type="string-array">
+          <item>zh-Hans-CN</item>
+        </set>
+        <set name="zh-Hant" type="string-array">
+          <item>zh-Hant-TW</item>
+        </set>
+      </function>
+      <function name="supported-Language-list">
+        <set name="Language-order" type="string-array">
+          <item>en</item>
+          <item>es</item>
+          <item>zh-Hans</item>
+          <item>zh-Hant</item>
+        </set>
+      </function>
+    </module>
+    <module name="EPST">
+      <function name="settings">
+        <set>
+          <item name="SprintCACombo" type="string">25A25A,25A26A,25A25A26A,25A41A,25A41C,41A41A,41C,41C41CU,41A41C,41D,41D41CU,41A41D,41C41C,41E,41C41D,41F</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="Settings">
+    <module name="list">
+      <function name="regulatory_generic_list">
+        <set name="single">
+          <!-- %%UAND000157_SAND000157_File Pool%% -->
+          <item name="text_2">FCC ID: NM82Q6U100</item>
+          <!-- %%UAND000157_SAND000157_File Pool%% -->
+          <item name="icon_3">/system/customize/resource/rp_naoc.png</item>
+          <!-- %%UAND000157_SAND000157_File Pool%% -->
+          <item name="text_1">Model: 2Q6U100</item>
+        </set>
+      </function>
+    </module>
+    <module name="properties">
+      <function>
+        <set name="single">
+          <item name="support_hardware_version">true</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="system">
+    <module name="deviceData">
+      <function>
+        <set name="single">
+          <item name="device_name">HTC 5G Hub</item>
+        </set>
+      </function>
+    </module>
+    <module name="deviceData1">
+      <function>
+        <set name="single">
+          <item name="sw_number">NA</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <BootConfiguration>
+    <!-- splash_screen.png -->
+  </BootConfiguration>
+</customization_form>

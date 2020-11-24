@@ -1,0 +1,13 @@
+ro.com.google.clientidbase=android-htc
+ro.com.google.clientidbase.am=android-sprint-us
+ro.com.google.clientidbase.ms=android-sprint-us-revc
+ro.net.apnwhitelist=ims
+ro.net.apnroamingwhitelist=fota
+ro.product.model=HTC 5G Hub
+ro.phone.min_match=8
+ro.ril.set.mtusize=1422
+dev.defaultwallpaper=/system/customize/resource/435408-2018_HTC_5G_Screen_Creative_Screen_2.jpg
+ro.ril.def.agps.mode=6
+ro.cw.base.version=P90
+ro.product.locale=en-US
+ro.com.android.prov_mobiledata=

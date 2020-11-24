@@ -1,0 +1,7 @@
+mcfg_sw/generic/AUNZ/Telstra/Commercial/mcfg_sw.mbn
+mcfg_sw/generic/NA/Sprint/Commercial/mcfg_sw.mbn
+mcfg_sw/generic/EU/DT/VoLTE/Commercial/mcfg_sw.mbn
+mcfg_sw/generic/common/Wild_Card/Commercial/mcfg_sw.mbn
+mcfg_sw/generic/China/CMCC/Commercial/Volte_OpenMkt/mcfg_sw.mbn
+mcfg_sw/generic/EU/EE/Commercial/mcfg_sw.mbn
+mcfg_sw/generic/HTC/DPAC/Commercial/mcfg_sw.mbn

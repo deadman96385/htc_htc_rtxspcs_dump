@@ -1,0 +1,2 @@
+[+] Version string: Linux version 4.14.83-perf-g93f16da (and@AABM) (clang0
+[!] The architecture of your kernel could not be guessed successfully. Please specify the --bit-size argument manually (use --help for its precise specification).

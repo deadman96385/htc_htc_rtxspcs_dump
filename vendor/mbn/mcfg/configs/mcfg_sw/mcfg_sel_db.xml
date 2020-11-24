@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy mcfg_db_ver="1.2.3" name="generic">
+  <initial>
+    <tristate_define name="iin" value="undef" />
+    <tristate_define name="3gpp_imsi" value="undef" />
+    <tristate_define name="3gpp2_imsi" value="undef" />
+    <tristate_define name="impi" value="undef" />
+    <tristate_define name="gid1" value="undef" />
+    <tristate_define name="gid2" value="undef" />
+  </initial>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">896101</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">505-01</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="Telstra" country_code="36" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="15" volte="true" vowifi="true" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">894901 894902 894903 8988228</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">262-01</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="DT" country_code="276" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="31" volte="true" vowifi="false" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">8901120</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">310-120 311-490 311-870 312-530 316-010</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="Sprint" country_code="840" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="2" volte="true" vowifi="false" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">898600 898602 898607 898212</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">460-00 460-02 460-07 460-08 460-04 460-31</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="CMCC" country_code="156" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="32" volte="true" vowifi="false" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">894412 894430 894429</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">234-30 234-33 234-34 234-31 234-32 235-01 235-02</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="EE" country_code="826" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="34" volte="true" vowifi="false" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="true" store_in="iin"> </iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">001-01</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="Wild_Card" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="8" />
+    </then>
+  </if>
+  <if>
+
+    <tristate_reset_all return="true" />
+    <then>
+      <SelRecord carrier_name="Wild_Card" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="8" />
+    </then>
+  </if>
+  <if>
+    <any_of evaluate_all="true">
+      <tristate_reset_all return="false" />
+      <iin_in not_present="false" store_in="iin">891048 891377</iin_in>
+      <imsi_3gpp_plmn_in not_present="false" store_in="3gpp_imsi">310-470 310-370</imsi_3gpp_plmn_in>
+    </any_of>
+    <then>
+      <SelRecord carrier_name="DPAC" country_code="316" iin="iin" imsi_3gpp="3gpp_imsi" mcfg_carrier_index="200" volte="false" vowifi="false" />
+    </then>
+  </if>
+</policy>

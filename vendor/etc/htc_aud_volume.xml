@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2015 The Android Open Source Project
+   StreamType:
+      AUDIO_STREAM_VOICE_CALL = 0
+      AUDIO_STREAM_SYSTEM = 1
+      AUDIO_STREAM_RING = 2
+      AUDIO_STREAM_MUSIC = 3
+      AUDIO_STREAM_ALARM = 4
+      AUDIO_STREAM_NOTIFICATION = 5
+      AUDIO_STREAM_BLUETOOTH_SCO = 6
+      AUDIO_STREAM_ENFORCED_AUDIBLE = 7
+
+   DeviceType:
+      AUDIO_DEVICE_OUT_SPEAKER = 2
+      AUDIO_DEVICE_OUT_WIRED_HEADSET = 4
+      AUDIO_DEVICE_OUT_WIRED_HEADPHONE = 8
+      AUDIO_DEVICE_OUT_BLUETOOTH_SCO = 16
+      AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET = 32
+      AUDIO_DEVICE_OUT_BLUETOOTH_SCO_CARKIT = 64
+      AUDIO_DEVICE_OUT_EARPIECE = 1
+      AUDIO_DEVICE_OUT_USB_DEVICE = 16384
+   Note:
+   1. Parser will find the first block that fit current stream and devices value, and select related volume table.
+   2. Devices and stream values should fit DeviceType and StreamType
+   3. Values in table with index are separated by only "," do not add whitespace to separate them.
+-->
+
+<htc_volumes>
+  <music_speaker>
+     <devices>2</devices>
+     <stream>3</stream>
+     <vol_val>-52,-47,-43,-38,-34,-31,-28,-25,-22,-19,-16,-13,-10,-7,0</vol_val>
+  </music_speaker>
+
+  <music_headset>
+     <devices>4,8</devices>
+     <stream>3</stream>
+     <vol_val>-56,-52,-48,-44,-40,-36,-32,-28,-24,-20,-16,-12,-8,-4,0</vol_val>
+  </music_headset>
+
+  <ringtone_speaker>
+     <devices>2</devices>
+     <stream>2</stream>
+     <vol_val>-31,-27,-23,-19,-15,-11,-2</vol_val>
+  </ringtone_speaker>
+
+  <alarm_speaker>
+     <devices>2</devices>
+     <stream>4</stream>
+     <vol_val>-31,-27,-23,-19,-15,-11,-2</vol_val>
+  </alarm_speaker>
+
+  <notification_speaker>
+     <devices>2</devices>
+     <stream>5</stream>
+     <vol_val>-31,-27,-23,-19,-15,-11,-2</vol_val>
+  </notification_speaker>
+
+  <system_speaker>
+     <devices>2</devices>
+     <stream>1</stream>
+     <vol_val>-31,-26,-21,-16,-11,-6,-2</vol_val>
+  </system_speaker>
+
+  <voip_earpiece>
+     <devices>1</devices>
+     <stream>0</stream>
+     <vol_val>-26.5,-22,-17.5,-13,-8,-2</vol_val>
+  </voip_earpiece>
+
+  <voip_speaker>
+     <devices>2</devices>
+     <stream>0</stream>
+     <vol_val>-26.5,-22,-17,-12,-6,0</vol_val>
+  </voip_speaker>
+
+  <voip_headset>
+     <devices>4</devices>
+     <stream>0</stream>
+     <vol_val>-23.01,-18.4,-13.8,-9,-4.6,0</vol_val>
+  </voip_headset>
+
+  <voip_headphone>
+     <devices>8</devices>
+     <stream>0</stream>
+     <vol_val>-23.01,-18.4,-13.8,-9,-4.6,0</vol_val>
+  </voip_headphone>
+
+  <voip_usb_headset>
+     <devices>16384</devices>
+     <stream>0</stream>
+     <vol_val>-23.01,-18.4,-13.8,-9,-4.6,0</vol_val>
+  </voip_usb_headset>
+
+  <voip_bt_sco>
+     <devices>16</devices>
+     <stream>0</stream>
+     <vol_val>-45,-42,-39,-36,-33,-30,-27,-24,-21,-18,-15,-12,-9,-6,-3,0</vol_val>
+  </voip_bt_sco>
+
+  <voip_bt_sco_headset>
+     <devices>32</devices>
+     <stream>0</stream>
+     <vol_val>-45,-42,-39,-36,-33,-30,-27,-24,-21,-18,-15,-12,-9,-6,-3,0</vol_val>
+  </voip_bt_sco_headset>
+
+  <voip_bt_carkit>
+     <devices>64</devices>
+     <stream>0</stream>
+     <vol_val>-45,-42,-39,-36,-33,-30,-27,-24,-21,-18,-15,-12,-9,-6,-3,0</vol_val>
+  </voip_bt_carkit>
+</htc_volumes>
